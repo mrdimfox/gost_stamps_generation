@@ -45,8 +45,10 @@ class A4Page:
                 stroke_width=thickness,
                 fill=fill))
 
-    def make_text(self):
-        pass
+    def make_text(self, s, x, y, length):
+        g = self._dwg.g(style="font-size:1.5mm; font-family:GOST Type A")
+        g.add(self._dwg.text(s, insert=(x,-y-0.6+self._size.raw()[1]), textLength=str(length), lengthAdjust="spacingAndGlyphs"))
+        self._dwg.add(g)
 
 
 gost_page = A4Page("test.svg")
@@ -73,5 +75,6 @@ for y in (0, 35, 40, 45):
 gost_page.make_rect((205-50, 5+15), (205-35, 5+25), 0.5)
 gost_page.make_rect((205-50, 5+15), (205-20, 5+25), 0.5)
 
+gost_page.make_text("Text", 20, 5, 20)
 gost_page.save()
 # dwg.add(dwg.text('Test', insert=(0, 0.2), fill='red'))
